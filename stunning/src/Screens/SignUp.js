@@ -1,4 +1,4 @@
-import {View, Text,TextInput,TouchableOpacity,alert,Alert} from 'react-native';
+import {View, Text,TextInput,TouchableOpacity,alert,Alert, ScrollView} from 'react-native';
 import React, {useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import { v4 as uuidv4, v4 } from 'uuid';
@@ -10,7 +10,8 @@ const SignUp = ({navigation}) => {
  const [name,setName]=useState('')
   
  const signUp=()=>{
-  const userId=Math.floor((Math.random() * 100) + 1);
+  const user=Math.floor((Math.random() * 100000) + 1);
+  const userId= user.toString();
   firestore()
   .collection('Users')
   .doc(userId)
@@ -29,7 +30,7 @@ const SignUp = ({navigation}) => {
 
 
   return (
-    <View>
+    <ScrollView>
       <Text style={{fontSize: 20, alignSelf: 'center', marginTop: 60}}>
         SignUp
       </Text>
@@ -111,7 +112,7 @@ const SignUp = ({navigation}) => {
         }}>
         {'Already have account'}
       </Text>
-    </View>
+    </ScrollView>
   );
 };
 

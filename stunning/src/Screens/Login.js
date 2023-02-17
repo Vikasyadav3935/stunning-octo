@@ -1,13 +1,63 @@
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  ScrollView,
+} from 'react-native';
+import React, {useState} from 'react';
+import firestore from '@react-native-firebase/firestore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({navigation}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const signin = () => {
+    firestore()
+      .collection('Users')
+
+      .where('email', '==', email)
+
+      .get()
+      .then(querySnapshot => {
+        if (querySnapshot._docs.length == 0) {
+          Alert.alert('User not found');
+        } else {
+          if (querySnapshot._docs[0]._data.password === password) {
+            saveData(
+              querySnapshot._docs[0]._data.name,
+              querySnapshot._docs[0]._data.userId,
+            );
+          } else {
+            Alert.alert('Password incorrect');
+          }
+
+          console.log(querySnapshot._docs[0]._data);
+        }
+      });
+  };
+
+  const saveData = async (name, userId) => {
+    await AsyncStorage.setItem('email', email);
+    await AsyncStorage.setItem('name', name);
+    await AsyncStorage.setItem('userId', userId);
+    navigation.navigate('Main');
+  };
+
+
+  
+
+
   return (
-    <View>
+    <ScrollView>
       <Text style={{fontSize: 20, alignSelf: 'center', marginTop: 100}}>
         Login
       </Text>
       <TextInput
+        onChangeText={setEmail}
+        value={email}
         placeholder="Email"
         style={{
           width: '90%',
@@ -22,6 +72,8 @@ const Login = ({navigation}) => {
 
       <TextInput
         placeholder="Enter Password"
+        onChangeText={setPassword}
+        value={password}
         secureTextEntry={true}
         style={{
           width: '90%',
@@ -44,6 +96,13 @@ const Login = ({navigation}) => {
           alignItems: 'center',
           justifyContent: 'center',
           borderRadius: 10,
+        }}
+        onPress={() => {
+          if (email !== '' && password !== '') {
+            signin();
+          } else {
+            Alert.alert('Please enter all details');
+          }
         }}>
         <Text style={{fontSize: 20, color: 'wheat'}}>Login</Text>
       </TouchableOpacity>
@@ -59,7 +118,7 @@ const Login = ({navigation}) => {
         }}>
         {'Create new account'}
       </Text>
-    </View>
+    </ScrollView>
   );
 };
 
