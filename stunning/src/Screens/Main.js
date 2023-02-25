@@ -1,8 +1,9 @@
 import { View, Text, TouchableOpacity } from 'react-native';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import firestore from '@react-native-firebase/firestore';
 
 const Main = ({navigation}) => {
+  const [blogdata,setBlogdata]=useState([]);
 
 useEffect(()=>{
     getBlogs()
@@ -17,12 +18,14 @@ useEffect(()=>{
     let data=[];
     querySnapshot.forEach(documentSnapshot => {
       data.push(documentSnapshot.data())
-      // console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());
+      // console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());ls
+      
     });
+    setBlogdata(data);
   })
   }
 
-
+//  console.log(blogdata)
   return (
     <View style={{flex:1}}>
         <View
@@ -34,9 +37,16 @@ useEffect(()=>{
             justifyContent:'space-between',
             alignItems:'center',
         }}
-        >
+        > 
+        <TouchableOpacity>
             <Text style={{color:'#fff',marginLeft:20,fontSize:18,fontWeight:'700'}}>Blog App</Text>
-            <Text style={{color:'#fff',marginRight:20,fontSize:18,fontWeight:'700'}}>Profile</Text>
+            </TouchableOpacity>
+        <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
+        <Text style={{color:'#fff',marginRight:20,fontSize:18,fontWeight:'700'}}>Profile</Text>
+          </TouchableOpacity>    
+        </View>
+        <View>
+
         </View>
         <TouchableOpacity 
         style={{
