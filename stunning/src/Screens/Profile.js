@@ -1,14 +1,33 @@
 import {View, Text, TouchableNativeFeedback} from 'react-native';
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Profile = ({navigation}) => {
 
+  const [email,setEmail]=useState('');
+  const [name,setName]=useState('');
+ 
+  useEffect(()=>{
+    getValue();
+  },[])
 
-  removeValue = async () => {
+
+ const getValue= async()=>{
+  try {
+   const email= await AsyncStorage.getItem('email');
+   const name=await AsyncStorage.getItem('name');
+   setEmail(email);
+   setName(name);
+  } catch (error) {
+     console.log(error)
+  }
+  console.log('doneget')
+ }
+
+   const removeValue = async () => {
     try {
-     const email= await AsyncStorage.getItem('email');
-     console.log(email)
+     await AsyncStorage.removeItem('email');
+    //  console.log(email)
     } catch(e) {
       console.log(e)
     }
@@ -17,6 +36,8 @@ const Profile = ({navigation}) => {
     navigation.navigate('Login')
 
   }
+
+
   return (
     <View>
       <TouchableNativeFeedback>
@@ -37,7 +58,7 @@ const Profile = ({navigation}) => {
               borderWidth: 0.5,
               borderRadius: 20,
             }}></View>
-          <Text style={{marginLeft: 20}}>vikasyadav3935@gmail.com</Text>
+          <Text style={{marginLeft: 20}}>{email}</Text>
         </View>
       </TouchableNativeFeedback>
       <View
@@ -50,7 +71,7 @@ const Profile = ({navigation}) => {
           padding: 10,
           marginLeft: 20,
         }}>
-        <Text>Vikas Yadav</Text>
+        <Text>{name}</Text>
       </View>
 
       <TouchableNativeFeedback
