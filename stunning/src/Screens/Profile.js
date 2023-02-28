@@ -1,4 +1,4 @@
-import {View, Text, TouchableNativeFeedback} from 'react-native';
+import {View, Text, TouchableNativeFeedback,Image} from 'react-native';
 import React,{useState,useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -57,7 +57,9 @@ const Profile = ({navigation}) => {
               height: 40,
               borderWidth: 0.5,
               borderRadius: 20,
-            }}></View>
+            }}>
+               <Image source={{uri:'https://cdn.pixabay.com/photo/2017/07/18/23/23/user-2517433__480.png'}} style={{width:39,height:39,borderRadius:20}} />
+            </View>
           <Text style={{marginLeft: 20}}>{email}</Text>
         </View>
       </TouchableNativeFeedback>
@@ -68,10 +70,11 @@ const Profile = ({navigation}) => {
           marginTop: 30,
           flexDirection: 'row',
           alignItems: 'center',
-          padding: 10,
+          padding: 1,
           marginLeft: 20,
+          
         }}>
-        <Text>{name}</Text>
+        <Text style={{fontSize:20}}>{name}</Text>
       </View>
 
       <TouchableNativeFeedback

@@ -21,10 +21,10 @@ const Splash = ({navigation}) => {
      const email=await AsyncStorage.getItem('email');
     
      if( email !== null ){
-      console.log(email,'!null')
+      // console.log(email,'!null')
       navigation.navigate('Main');
      }else{
-      console.log(email,'1null')
+      // console.log(email,'1null')
       navigation.navigate('Login');
      }
   }
