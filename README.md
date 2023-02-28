@@ -1,7 +1,7 @@
 # stunning-octo
 ### A Blog App
 I am using React-native , Firestore , storage for building this application. 
-### This is a individual projects.
+### This is a individual project.
 ## Screenshot
 <p align="center" >
   <img src="https://user-images.githubusercontent.com/108892061/221830569-852c20cf-c293-492e-a75b-e6197f0a9dbd.png" width="350" title="Login Screen">
