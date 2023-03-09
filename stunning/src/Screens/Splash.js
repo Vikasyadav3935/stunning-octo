@@ -8,26 +8,26 @@ const Splash = ({navigation}) => {
   useEffect(() => {
     
    setTimeout(() => {
-    checkLogin()
+    checkLogin();
     // navigation.navigate('Login');
     
-   }, 3000);
+   }, );
    
    
   }, [])
 
-  
   const checkLogin=async()=>{
-     const email=await AsyncStorage.getItem('email');
-    
-     if( email !== null ){
-      // console.log(email,'!null')
-      navigation.navigate('Main');
-     }else{
-      // console.log(email,'1null')
-      navigation.navigate('Login');
-     }
-  }
+    const email=await AsyncStorage.getItem('email');
+   
+    if( email !== null ){
+     // console.log(email,'!null')
+     navigation.navigate('Main');
+    }else{
+     console.log(email,'1null')
+     navigation.navigate('Login');
+    }
+ }
+  
   
 
   return (

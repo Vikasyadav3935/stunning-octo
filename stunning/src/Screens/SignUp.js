@@ -82,7 +82,7 @@ const SignUp = ({navigation}) => {
       <TouchableOpacity
         style={{
           width: '90%',
-          backgroundColor: '#aad',
+          backgroundColor: '#355666',
           alignSelf: 'center',
           marginTop: 30,
           height: 50,

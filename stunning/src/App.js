@@ -1,11 +1,13 @@
-import {View,Text } from 'react-native';
-import AppNavigator from './AppNavigator';
 
+import AppNavigator from './AppNavigator';
+import ContextProvider from './components/Context';
 
 
 const App=()=>{
   return (
+    <ContextProvider>
    <AppNavigator/>
+   </ContextProvider>
   )
 }
 

@@ -83,7 +83,7 @@ const AddnewBlog = () => {
     const reference = storage().ref(data.assets[0].fileName);
 
     const pathToFile =data.assets[0].uri;
-    // uploads file
+    
     await reference.putFile(pathToFile);
     const url = await storage().ref(data.assets[0].fileName).getDownloadURL();
     console.log(url);
@@ -122,8 +122,8 @@ const AddnewBlog = () => {
         onPress={requestCameraPermission}>
         <Text style={{color: '#ffff'}}>Pick Image</Text>
       </TouchableOpacity>
-      <View style={{height:200,width:'92%',alignSelf:'center',marginTop:20}}>
-     {  data!==null ?<Image source={{uri:data.assets[0].uri}} style={{width:'100%',height:'100%'}}  />:''}
+      <View style={{height:200,width:'92%',alignSelf:'center',marginTop:20,borderWidth:.5}}>
+     {  data!==null ? <Image source={{uri:data.assets[0].uri}} style={{width:'100%',height:'100%'}}  />:''}
       </View>
       <TouchableOpacity
         style={{
@@ -140,7 +140,7 @@ const AddnewBlog = () => {
 
         onPress={() => uploadImage()}>
 
-        <Text style={{color: '#ffff'}}>Add Blog</Text>
+        <Text style={{color: '#ffffff'}}>Add Blog</Text>
       </TouchableOpacity>
     </View>
   );

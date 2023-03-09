@@ -6,13 +6,20 @@ import {
   Alert,
   ScrollView,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AuthContext } from '../components/Context';
 
 const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const {state,setState}=useContext(AuthContext);
+
+  useEffect(()=>{
+   setState(false);
+  },[])
 
   const signin = () => {
     firestore()
@@ -51,8 +58,9 @@ const Login = ({navigation}) => {
 
 
   return (
-    <ScrollView>
-      <Text style={{fontSize: 20, alignSelf: 'center', marginTop: 100}}>
+    <View  style={{flex:1}}>
+      <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+      <Text style={{fontSize: 20, alignSelf: 'center', }}>
         Login
       </Text>
       <TextInput
@@ -89,7 +97,7 @@ const Login = ({navigation}) => {
       <TouchableOpacity
         style={{
           width: '90%',
-          backgroundColor: '#aad',
+          backgroundColor: '#355666',
           alignSelf: 'center',
           marginTop: 30,
           height: 50,
@@ -118,7 +126,8 @@ const Login = ({navigation}) => {
         }}>
         {'Create new account'}
       </Text>
-    </ScrollView>
+      </View>
+    </View>
   );
 };
 
