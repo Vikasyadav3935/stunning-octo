@@ -3,6 +3,7 @@ import React, {useEffect, useState,useContext} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import {useIsFocused} from '@react-navigation/native';
 import { AuthContext } from '../components/Context';
+import PostCard from '../components/PostCard';
 
 const Main = ({navigation}) => {
   const [blogdata, setBlogdata] = useState([]);
@@ -23,9 +24,9 @@ const Main = ({navigation}) => {
         let data = [];
         querySnapshot.forEach(documentSnapshot => {
           data.push(documentSnapshot.data());
-          // console.log('User ID: ', documentSnapshot.id, documentSnapshot.data());ls
         });
         setBlogdata(data);
+
       });
   };
 
@@ -64,56 +65,14 @@ const Main = ({navigation}) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <View style={{marginBottom:55}}>
+      <View style={{marginBottom:55,}}>
         <FlatList
           data={blogdata}
+          ListEmptyComponent={<ActivityIndicator size="large" color="#00ff" />}
           renderItem={({item}) => (
-            <View
-              style={{
-                width: '90%',
-                alignSelf: 'center',
-                borderWidth: 0.5,
-                borderRadius: 5,
-                marginTop: 20,
-                elevation:6,
-                backgroundColor:'#ffffff'
-              }}>
-              <View
-                style={{flexDirection: 'row', margin: 5, alignItems: 'center'}}>
-                <View
-                  style={{
-                    width: 40,
-                    height: 40,
-                    borderRadius: 20,
-                    borderWidth: 0.5,
-                  }}>
-                  <Image
-                    source={{
-                      uri: 'https://cdn.pixabay.com/photo/2017/07/18/23/23/user-2517433__480.png',
-                    }}
-                    style={{width: 39, height: 39, borderRadius: 20,padding:10}}
-                  />
-                </View>
-                <Text style={{marginLeft: 10}}>Vikas </Text>
-              </View>
+           <PostCard  image={item.image} caption={item.caption} />
 
-              <Text style={{margin: 5,color:'#2aa'}}>{item.caption}</Text>
-              
-             <Image
-                source={{uri: item.image}}
-                style={{
-                  width: '95%',
-                  height: 400,
-                  alignSelf: 'center',
-                  marginVertical: 7,
-                  borderRadius: 5,
-                }}
-              />
-            
-              <View style={{borderTopWidth:.5,width:'100%',height:50}}>
-              
-              </View>
-            </View>
+           
           )}
           keyExtractor={el => Math.random()}
         />

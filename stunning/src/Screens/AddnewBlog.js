@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   PermissionsAndroid,
   Image,
+  ScrollView,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import firestore from '@react-native-firebase/firestore';
@@ -93,6 +94,7 @@ const AddnewBlog = () => {
 
 
   return (
+    <ScrollView>
     <View>
       <TextInput
         onChangeText={setCaption}
@@ -122,7 +124,7 @@ const AddnewBlog = () => {
         onPress={requestCameraPermission}>
         <Text style={{color: '#ffff'}}>Pick Image</Text>
       </TouchableOpacity>
-      <View style={{height:200,width:'92%',alignSelf:'center',marginTop:20,borderWidth:.5}}>
+      <View style={{height:300,width:'92%',alignSelf:'center',marginTop:20,borderWidth:.5}}>
      {  data!==null ? <Image source={{uri:data.assets[0].uri}} style={{width:'100%',height:'100%'}}  />:''}
       </View>
       <TouchableOpacity
@@ -136,6 +138,7 @@ const AddnewBlog = () => {
           backgroundColor: 'purple',
           justifyContent: 'center',
           alignItems: 'center',
+          marginBottom:15
         }}
 
         onPress={() => uploadImage()}>
@@ -143,6 +146,7 @@ const AddnewBlog = () => {
         <Text style={{color: '#ffffff'}}>Add Blog</Text>
       </TouchableOpacity>
     </View>
+    </ScrollView>
   );
 };
 

@@ -1,4 +1,4 @@
-import {View, Text, TouchableNativeFeedback,Image} from 'react-native';
+import {View, Text, StyleSheet,Button,Image} from 'react-native';
 import React,{useState,useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -39,62 +39,50 @@ const Profile = ({navigation}) => {
 
 
   return (
-    <View>
-      <TouchableNativeFeedback>
-        <View
-          style={{
-            width: '90%',
-            alignSelf: 'center',
-            marginTop: 30,
-            flexDirection: 'row',
-            alignItems: 'center',
-            padding: 10,
-            borderRadius: 10,
-          }}>
-          <View
-            style={{
-              width: 40,
-              height: 40,
-              borderWidth: 0.5,
-              borderRadius: 20,
-            }}>
-               <Image source={{uri:'https://cdn.pixabay.com/photo/2017/07/18/23/23/user-2517433__480.png'}} style={{width:39,height:39,borderRadius:20}} />
-            </View>
-          <Text style={{marginLeft: 20}}>{email}</Text>
-        </View>
-      </TouchableNativeFeedback>
-      <View
-        style={{
-          width: '90%',
-          alignSelf: 'center',
-          marginTop: 30,
-          flexDirection: 'row',
-          alignItems: 'center',
-          padding: 1,
-          marginLeft: 20,
-          
-        }}>
-        <Text style={{fontSize:20}}>{name}</Text>
-      </View>
-
-      <TouchableNativeFeedback
-      onPress={removeValue}
-      >
-        <View
-          style={{
-            width: '90%',
-            alignSelf: 'center',
-            marginTop: 30,
-            alignItems: 'center',
-            padding: 10,
-            backgroundColor: '#739',
-            borderRadius: 10,
-          }}>
-          <Text style={{color: 'white'}}>Logout</Text>
-        </View>
-      </TouchableNativeFeedback>
+    <View style={styles.container}>
+    <View style={styles.profile}>
+      <Image source={{ uri:'https://randomuser.me/api/portraits/men/1.jpg' }} style={styles.photo} />
+      <Text style={styles.name}>{name}</Text>
+      <Text style={styles.email}>{email}</Text>
+      <Text style={styles.age}>Age: 23</Text>
+      <Button title="Logout" onPress={removeValue} />
     </View>
+  </View>
   );
 };
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+  },
+  profile: {
+    alignItems: 'center',
+  },
+  photo: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 10,
+  },
+  name: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  email: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 5,
+  },
+  age: {
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 10,
+  },
+});
 
 export default Profile;
